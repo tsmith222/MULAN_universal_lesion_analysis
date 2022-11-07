@@ -156,7 +156,7 @@ class DeepLesionDataset(object):
                 image_fn1 = '%s%s%03d.png' % (dirname, os.sep, slice_idx + delta)
                 if os.path.exists(os.path.join(self.data_path, image_fn1)):
                     image_fn = image_fn1
-        im, im_scale, crop = load_prep_img(self.data_path, image_fn, spacing, slice_intv,
+        im, im_scale, crop, _ = load_prep_img(self.data_path, image_fn, spacing, slice_intv,
                                            cfg.INPUT.IMG_DO_CLIP, num_slice=num_slice, is_train=is_train)
 
         im -= cfg.INPUT.PIXEL_MEAN

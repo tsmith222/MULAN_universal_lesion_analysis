@@ -92,8 +92,8 @@ def visualize(im, target, result, info, masker):
     diameters = result.get_field('diameter_mm').cpu().numpy()
 
     pred *= scale
-    overlay, msgs = draw_results(overlay, pred, labels, scores, tag_predictions=tag_predictions, tag_scores=tag_scores,
-                           contours=contours, recists=recists, diameters=diameters)
+    overlay, msgs = draw_results(overlay, pred, labels=labels, scores=scores, tag_predictions=tag_predictions,
+                                 tag_scores=tag_scores, contours=contours, recists=recists, diameters=diameters)
     plt.figure(1)
     plt.imshow(overlay)
     for msg in msgs:
@@ -118,7 +118,7 @@ def visualize(im, target, result, info, masker):
     plt.show()
 
 
-def draw_results(im, boxes,  cour_list1, cour_list2, recist_list1, recist_list2, labels=None, scores=None, class_names=None, tag_predictions=None, tag_scores=None,
+def draw_results(im, boxes, labels=None, scores=None, class_names=None, tag_predictions=None, tag_scores=None,
                  contours=None, recists=None, diameters=None, colors=None, thickness=(1,1,1)):
     """
     draw boxes, masks on image; generate message of predictions
@@ -168,10 +168,6 @@ def draw_results(im, boxes,  cour_list1, cour_list2, recist_list1, recist_list2,
         if recists is not None:
             assert len(recists) == num_box
             recist = recists[i].astype(int)
-            if recist.shape[0] == 8:
-                for x_b in range(8):
-                    recist_list1.append(recist[x_b])
-                    recist_list1.append(' ')
                     
             im = cv2.line(im, tuple(recist[:2]), tuple(recist[2:4]),
                           [c*2/3 for c in color], thickness=thickness[2])

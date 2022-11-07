@@ -325,5 +325,5 @@ def merge_a_into_b(a, b):
 def cfg_from_file(filename):
     """Load a config file and merge it into the default options."""
     with open(filename, 'r') as f:  # not valid grammar in Python 2.5
-        yaml_cfg = edict(yaml.load(f))
+        yaml_cfg = edict(yaml.safe_load(f))
     return yaml_cfg

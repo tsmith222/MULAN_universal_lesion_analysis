@@ -11,7 +11,9 @@ pip install --upgrade cython
 # necessary python libraries
 pip install -r requirements.txt
 
-sudo apt install python3-tk
+# Removed for anyone working without root access for apt installation.
+# If intending to use tk for gui support, run this comment or request your admin install
+# sudo apt install python3-tk
 
 python setup.py build develop
 
