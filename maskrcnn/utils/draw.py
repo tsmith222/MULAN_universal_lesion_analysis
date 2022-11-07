@@ -94,7 +94,7 @@ def visualize(im, target, result, info, masker):
     pred *= scale
     overlay, msgs = draw_results(overlay, pred, labels=labels, scores=scores, tag_predictions=tag_predictions,
                                  tag_scores=tag_scores, contours=contours, recists=recists, diameters=diameters)
-    plt.figure(1)
+    fig = plt.figure(1)
     plt.imshow(overlay)
     for msg in msgs:
         print(msg)
@@ -115,6 +115,15 @@ def visualize(im, target, result, info, masker):
         heatmap = np.sum(mask1, (0, 1)).astype('uint8')
         # heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
         plt.imshow(heatmap, cmap='gray')
+
+    plt.xticks([], [])
+    plt.yticks([], [])
+    fn = "-".join(info['image_fn'].split(os.sep)).split(".")[0]
+    plt.title(fn)
+    nm = []
+    for i in range(len(msgs)):
+        nm.append("".join(msgs[i].split(',')[:5]))
+    fig.text(0.5, 0.1, "\n".join(nm), size=7, ha='center', va='top')
     plt.show()
 
 
